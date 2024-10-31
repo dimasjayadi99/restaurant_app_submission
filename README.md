@@ -1,16 +1,40 @@
-# submission_restauirant_app
+# submission_restaurant_app
 
 Submission Dicoding Restaurant App Flutter
 
-## Getting Started
+## Screenshot
+![Frame 1 (4)](https://github.com/user-attachments/assets/fcad040d-ac10-466b-8ff9-33e7c0dce744)
 
-This project is a starting point for a Flutter application.
+## Instalasi
+1. **Clone repository ini**:  
+   Buka terminal dan jalankan perintah berikut:
+   ```bash
+   git clone <URL_REPOSITORY>
 
-A few resources to get you started if this is your first Flutter project:
+2. Buka dan Jalankan
+- Buka project menggunakan Android Studio
+- Pilih "Open an existing Android Studio project".
+- Arahkan ke folder yang telah di-clone.
+- Build dan jalankan aplikasi di emulator atau perangkat Android
+  ```bash
+  flutter run
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Fitur Aplikasi
+- List Restaurant
+- Detail Page Restaurant
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Implementasi Materi
+- Navigation & Routing
+- Themes & Typography
+- Sliverlist
+- Tab bar
+- Hero Animation
+
+## Third Party
+- `google_fonts`: [import Google Font](https://pub.dev/packages/google_fonts)
+- `flutter_rating_bar`: [import rating bar](https://pub.dev/packages/flutter_rating_bar)
+- `shimmer`: [import shimmer](https://pub.dev/packages/shimmer)
+
+## Credit
+- [Github](https://github.com/dimasjayadi99)
+
