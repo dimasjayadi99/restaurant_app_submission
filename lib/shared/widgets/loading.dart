@@ -3,10 +3,9 @@ import 'package:shimmer/shimmer.dart';
 import 'package:submission_restauirant_app/common/app_const.dart';
 import 'package:submission_restauirant_app/shared/widgets/gap.dart';
 
-class Loading{
-
+class Loading {
   // shimmer for the restaurant list
-  Widget listVerticalShimmer(){
+  Widget listVerticalShimmer() {
     return Shimmer.fromColors(
       baseColor: Colors.grey[300]!,
       highlightColor: Colors.grey[100]!,
@@ -15,7 +14,6 @@ class Loading{
             return Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -24,15 +22,14 @@ class Loading{
                   width: 120,
                   height: 100,
                 ),
-
                 const Gap.h(w: 16),
-
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.all(Radius.circular(10)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10)),
                         color: Colors.grey[300],
                       ),
                       width: 200,
@@ -41,7 +38,8 @@ class Loading{
                     const Gap.v(h: 16),
                     Container(
                       decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.all(Radius.circular(10)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10)),
                         color: Colors.grey[300],
                       ),
                       width: 150,
@@ -50,7 +48,8 @@ class Loading{
                     const Gap.v(h: 16),
                     Container(
                       decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.all(Radius.circular(10)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10)),
                         color: Colors.grey[300],
                       ),
                       width: 80,
@@ -63,8 +62,7 @@ class Loading{
           },
           itemCount: 5,
           shrinkWrap: true,
-          separatorBuilder: (context, index) => const Gap.v(h: 16)
-      ),
+          separatorBuilder: (context, index) => const Gap.v(h: 16)),
     );
   }
 
@@ -77,8 +75,7 @@ class Loading{
         color: Colors.grey[300],
         borderRadius: BorderRadius.circular(8),
       ),
-      child: const Center(child: CircularProgressIndicator()
-      ),
+      child: const Center(child: CircularProgressIndicator()),
     );
   }
 
@@ -92,17 +89,15 @@ class Loading{
         borderRadius: BorderRadius.circular(8),
       ),
       child: const Center(
-          child:
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Icon(Icons.error, color: Colors.red),
-              Gap.v(h: 4),
-              Text(AppConst.imageError)
-            ],
-          )),
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Icon(Icons.error, color: Colors.red),
+          Gap.v(h: 4),
+          Text(AppConst.imageError)
+        ],
+      )),
     );
   }
-
 }

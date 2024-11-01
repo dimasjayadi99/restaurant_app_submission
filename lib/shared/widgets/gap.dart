@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-class Gap extends StatelessWidget{
+class Gap extends StatelessWidget {
   final double? width;
   final double? height;
 

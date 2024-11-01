@@ -16,7 +16,9 @@ class AppConst {
   static const Color secondaryColor = Color(0xFFF5F5DC);
 
   // assets
-  static const String defaultImageRestaurant = "assets/images/default_restaurant.png";
+  static const String defaultImageRestaurant =
+      "assets/images/default_restaurant.png";
   static const String jsonPath = "assets/json/local_restaurant.json";
-
+  static const String baseImagePath =
+      "https://restaurant-api.dicoding.dev/images/medium/";
 }

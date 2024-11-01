@@ -7,10 +7,7 @@ class AppStyle {
 
   // logo text style
   static TextStyle logoStyle() => GoogleFonts.poppins(
-    fontWeight: FontWeight.bold,
-    fontSize: 24,
-    color: AppConst.primaryColor
-  );
+      fontWeight: FontWeight.bold, fontSize: 24, color: AppConst.primaryColor);
 
   // text theme
   static final textTheme = TextTheme(
@@ -78,5 +75,4 @@ class AppStyle {
       letterSpacing: 1.5,
     ),
   );
-
 }
