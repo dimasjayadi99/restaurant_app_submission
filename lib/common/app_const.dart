@@ -8,8 +8,10 @@ class AppConst {
   static const String creator = "Dimas Jayadi";
   static const String welcomingText = "Recommendation restaurant for you!";
   static const String searchText = "Type to search...";
-  static const String dataNotFound = "No restaurants found.";
+  static const String dataNotFound = "No restaurants found";
   static const String imageError = "Image Error";
+  static const String noInternetConnection = "No internet connection";
+  static const String successAddReview = "Success add a new review";
 
   // color
   static const Color primaryColor = Color(0xFF8BC34A);

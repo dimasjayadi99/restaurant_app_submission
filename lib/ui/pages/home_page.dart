@@ -6,6 +6,7 @@ import 'package:submission_restauirant_app/config/routes.dart';
 import 'package:submission_restauirant_app/provider/restaurant_list_provider.dart';
 import 'package:submission_restauirant_app/shared/widgets/loading.dart';
 import 'package:submission_restauirant_app/ui/widgets/card_list_restaurant.dart';
+import 'package:submission_restauirant_app/ui/widgets/custom_textfield.dart';
 import '../../shared/widgets/gap.dart';
 
 class HomePage extends StatefulWidget {
@@ -52,23 +53,17 @@ class HomePageState extends State<HomePage> {
                 const Gap.v(h: 16),
 
                 // Search text field
-                TextFormField(
-                  textInputAction: TextInputAction.search,
-                  controller: _searchController,
-                  decoration: const InputDecoration(
-                    hintText: AppConst.searchText,
-                    hintStyle: TextStyle(fontWeight: FontWeight.normal),
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide(width: 1, color: Colors.grey),
-                        borderRadius: BorderRadius.all(Radius.circular(8))),
-                    prefixIcon: Icon(Icons.search),
-                  ),
-                  onFieldSubmitted: (value) async {
-                    await Provider.of<RestaurantListProvider>(context,
-                            listen: false)
-                        .searchRestaurant(value);
-                  },
-                ),
+                CustomTextField(
+                    controller: _searchController,
+                    icon: Icons.search,
+                    inputAction: TextInputAction.search,
+                    hinText: AppConst.searchText,
+                    onFieldSubmitted: (value) async {
+                      await Provider.of<RestaurantListProvider>(context,
+                              listen: false)
+                          .searchRestaurant(value);
+                    }),
+
                 const Gap.v(h: 24),
 
                 // Restaurant list
@@ -85,7 +80,7 @@ class HomePageState extends State<HomePage> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Text(data.message ?? "Tidak diketahui"),
+                                Text(data.message ?? "Something went wrong"),
                                 TextButton(
                                     onPressed: () {
                                       restaurantProvider.fetchListRestaurant();

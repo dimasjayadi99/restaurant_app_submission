@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:submission_restauirant_app/common/app_const.dart';
 import 'package:submission_restauirant_app/data/models/restaurant_review_model.dart';
 
 import '../common/response_state.dart';
@@ -26,7 +27,7 @@ class AddReviewProvider extends ChangeNotifier {
       if (!response.error) {
         _addReview = response;
         responseState = ResponseState.success;
-        return message = "Success add a new review";
+        return message = AppConst.successAddReview;
       } else {
         responseState = ResponseState.failed;
         return message = response.message;
@@ -34,7 +35,7 @@ class AddReviewProvider extends ChangeNotifier {
     } catch (error) {
       responseState = ResponseState.failed;
       if (error is SocketException) {
-        return message = "No internet connection";
+        return message = AppConst.noInternetConnection;
       } else {
         return message = "An error has occurred: $error";
       }

@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
+import 'package:submission_restauirant_app/common/app_const.dart';
 import '../common/response_state.dart';
 import '../data/api/api_service.dart';
 import '../data/models/restaurant_list_model.dart';
@@ -27,6 +28,7 @@ class RestaurantListProvider extends ChangeNotifier {
         responseState = _restaurantList.isEmpty
             ? ResponseState.empty
             : ResponseState.success;
+        message = _restaurantList.isEmpty ? AppConst.dataNotFound : null;
       } else {
         responseState = ResponseState.failed;
         message = response.message;
@@ -34,7 +36,7 @@ class RestaurantListProvider extends ChangeNotifier {
     } catch (error) {
       responseState = ResponseState.failed;
       if (error is SocketException) {
-        message = 'No internet connection';
+        message = AppConst.noInternetConnection;
       } else {
         message = 'An error occurred: $error';
       }
@@ -55,14 +57,14 @@ class RestaurantListProvider extends ChangeNotifier {
         _restaurantList.addAll(response);
       } else {
         responseState = ResponseState.empty;
-        message = "Data not found";
+        message = AppConst.dataNotFound;
       }
     } catch (error) {
       responseState = ResponseState.failed;
       if (error is SocketException) {
-        message = "No internet connection";
+        message = AppConst.noInternetConnection;
       } else {
-        message = "An error occurred: $error";
+        message = "An error has occurred: $error";
       }
     } finally {
       notifyListeners();

@@ -6,10 +6,10 @@ import 'package:submission_restauirant_app/common/response_state.dart';
 import 'package:submission_restauirant_app/data/models/restaurant_detail_model.dart';
 import 'package:submission_restauirant_app/provider/add_review_provider.dart';
 import 'package:submission_restauirant_app/provider/restaurant_detail_provider.dart';
-import 'package:submission_restauirant_app/shared/widgets/text_fields.dart';
-import 'package:submission_restauirant_app/shared/widgets/snackbar.dart';
 import 'package:submission_restauirant_app/ui/widgets/card_list_menus.dart';
+import 'package:submission_restauirant_app/ui/widgets/custom_textfield.dart';
 import '../../shared/widgets/gap.dart';
+import '../../utils/snack_bar_util.dart';
 
 class DetailPage extends StatefulWidget {
   final String id;
@@ -28,8 +28,6 @@ class DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _reviewController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  late List<bool> isCheckedListFood;
-  late List<bool> isCheckedListDrink;
 
   String id = "";
   bool isAddReview = false;
@@ -53,13 +51,6 @@ class DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-    isCheckedListFood.clear();
-    isCheckedListDrink.clear();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
@@ -70,15 +61,11 @@ class DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
             case ResponseState.loading:
               return const Center(child: CircularProgressIndicator());
             case ResponseState.empty:
-              return const Center(
-                child: Text("Data is empty"),
+              return Center(
+                child: Text(data.message ?? 'Something went wrong'),
               );
             case ResponseState.success:
               restaurantDetail = data.restaurantDetail;
-              isCheckedListFood = List.generate(
-                  restaurantDetail!.menus.foods.length, (_) => false);
-              isCheckedListDrink = List.generate(
-                  restaurantDetail!.menus.drinks.length, (_) => false);
               return CustomScrollView(
                 slivers: [
                   // app bar
@@ -95,7 +82,7 @@ class DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                 ],
               );
             case ResponseState.failed:
-              return Center(child: Text(data.message!));
+              return Center(child: Text(data.message ?? ''));
             default:
               return Container();
           }
@@ -264,10 +251,19 @@ class DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      buildFormTextField(_nameController, "Nama", Icons.person),
+                      CustomTextField(
+                        controller: _nameController,
+                        icon: Icons.person,
+                        inputAction: TextInputAction.next,
+                        label: "Nama",
+                      ),
                       const Gap.v(h: 8),
-                      buildFormTextField(
-                          _reviewController, "Review", Icons.text_snippet),
+                      CustomTextField(
+                        controller: _reviewController,
+                        icon: Icons.text_snippet,
+                        inputAction: TextInputAction.done,
+                        label: "Review",
+                      ),
                       const Gap.v(h: 8),
                       TextButton.icon(
                           iconAlignment: IconAlignment.end,
@@ -286,16 +282,18 @@ class DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                                             listen: false)
                                         .postReviewRestaurant(id, name, review);
 
-                                if (mounted)
+                                if (mounted) {
                                   SnackBarUtil()
                                       .showSnackBar(context, status, true);
+                                }
                                 _nameController.clear();
                                 _reviewController.clear();
                                 restaurantProvider.fetchDetailRestaurant(id);
                               } catch (error) {
-                                if (mounted)
+                                if (mounted) {
                                   SnackBarUtil()
                                       .showSnackBar(context, "$error", false);
+                                }
                               }
                             }
                           },
@@ -385,13 +383,8 @@ class DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                 delegate: SliverChildBuilderDelegate(
                   (context, index) {
                     return CardListMenus(
-                      value: isCheckedListFood[index],
                       name: restaurantDetail!.menus.foods[index].name,
-                      onChanged: (value) {
-                        setState(() {
-                          isCheckedListFood[index] = value ?? false;
-                        });
-                      },
+                      index: index,
                     );
                   },
                   childCount: restaurantDetail!.menus.foods.length,
@@ -407,13 +400,8 @@ class DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                 delegate: SliverChildBuilderDelegate(
                   (context, index) {
                     return CardListMenus(
-                      value: isCheckedListDrink[index],
                       name: restaurantDetail!.menus.drinks[index].name,
-                      onChanged: (value) {
-                        setState(() {
-                          isCheckedListDrink[index] = value ?? false;
-                        });
-                      },
+                      index: index,
                     );
                   },
                   childCount: restaurantDetail!.menus.drinks.length,
