@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:submission_restauirant_app/data/models/restaurant_detail_model.dart';
+import 'package:submission_restauirant_app/utils/date_formatter.dart';
 
 class ReviewPage extends StatefulWidget {
   final List<CustomerReview> listReview;
@@ -37,7 +38,7 @@ class ReviewPageState extends State<ReviewPage> {
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   subtitle: Text(listReview[index].review),
-                  trailing: Text(listReview[index].date),
+                  trailing: Text(formatDate(listReview[index].date)),
                 );
               },
               itemCount: listReview.length)),

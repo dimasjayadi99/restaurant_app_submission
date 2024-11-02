@@ -8,6 +8,7 @@ import 'package:submission_restauirant_app/provider/add_review_provider.dart';
 import 'package:submission_restauirant_app/provider/restaurant_detail_provider.dart';
 import 'package:submission_restauirant_app/ui/widgets/card_list_menus.dart';
 import 'package:submission_restauirant_app/ui/widgets/custom_textfield.dart';
+import 'package:submission_restauirant_app/utils/date_formatter.dart';
 import '../../shared/widgets/gap.dart';
 import '../../utils/snack_bar_util.dart';
 
@@ -320,8 +321,8 @@ class DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                         ),
                         subtitle: Text(
                             restaurantDetail!.customerReviews[index].review),
-                        trailing:
-                            Text(restaurantDetail!.customerReviews[index].date),
+                        trailing: Text(formatDate(
+                            restaurantDetail!.customerReviews[index].date)),
                       );
                     },
                     childCount: restaurantDetail!.customerReviews.length > 5
