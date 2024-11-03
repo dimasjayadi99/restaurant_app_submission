@@ -4,6 +4,8 @@ import 'package:submission_restauirant_app/common/response_state.dart';
 import 'package:submission_restauirant_app/provider/database_provider.dart';
 import 'package:submission_restauirant_app/ui/widgets/card_list_restaurant.dart';
 
+import '../../common/app_const.dart';
+
 class FavoritePage extends StatefulWidget{
   const FavoritePage({super.key});
 
@@ -37,9 +39,9 @@ class FavoritePageState extends State<FavoritePage>{
                   case ResponseState.loading:
                     return const Center(child: CircularProgressIndicator());
                   case ResponseState.empty:
-                    return Center(child: Text(data.message ?? "Tidak diketahui"));
+                    return Center(child: Text(data.message ?? AppConst.somethingWentWrong));
                   case ResponseState.failed:
-                    return Center(child: Text(data.message ?? "Tidak diketahui"));
+                    return Center(child: Text(data.message ?? AppConst.somethingWentWrong));
                   case ResponseState.success:
                     return ListView.builder(
                         itemBuilder: (context, index){

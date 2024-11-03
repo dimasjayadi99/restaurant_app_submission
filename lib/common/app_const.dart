@@ -11,6 +11,7 @@ class AppConst {
   static const String dataNotFound = "No restaurants found";
   static const String imageError = "Image Error";
   static const String noInternetConnection = "No internet connection";
+  static const String somethingWentWrong = "Something went wrong";
   static const String successAddReview = "Success add a new review";
   static const String notificationKey = 'notification';
   static const String favoriteSuccessAdd = "Added to favorites successfully";

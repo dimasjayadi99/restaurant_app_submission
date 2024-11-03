@@ -212,9 +212,9 @@ class DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                                     await Provider.of<DatabaseProvider>(context, listen: false).removeFavoriteRestaurant(restaurantDetail!.id);
                                   }
                                   if (data.responseState == ResponseState.success) {
-                                    if(context.mounted) SnackBarUtil().showSnackBar(context, data.message ?? "tidak diketahui", true);
+                                    if(context.mounted) SnackBarUtil().showSnackBar(context, data.message ?? AppConst.somethingWentWrong, true);
                                   } else {
-                                    if(context.mounted) SnackBarUtil().showSnackBar(context, data.message ?? "tidak diketahui", false);
+                                    if(context.mounted) SnackBarUtil().showSnackBar(context, data.message ?? AppConst.somethingWentWrong, false);
                                   }
                                 } catch (error) {
                                   if(context.mounted) SnackBarUtil().showSnackBar(context, error.toString(), false);
