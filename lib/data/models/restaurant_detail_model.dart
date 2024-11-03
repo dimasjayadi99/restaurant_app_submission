@@ -1,3 +1,5 @@
+import 'package:submission_restauirant_app/data/models/restaurant_list_model.dart';
+
 class RestaurantDetailModel {
   final bool error;
   final String message;
@@ -60,6 +62,17 @@ class RestaurantDetail {
       rating: json['rating'].toDouble(),
       customerReviews:
           customerReviewsList.map((i) => CustomerReview.fromJson(i)).toList(),
+    );
+  }
+
+  Restaurant toRestaurant() {
+    return Restaurant(
+      id: id,
+      name: name,
+      description: description,
+      pictureId: pictureId,
+      city: city,
+      rating: rating,
     );
   }
 }

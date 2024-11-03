@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:submission_restauirant_app/common/app_const.dart';
 import 'package:submission_restauirant_app/common/response_state.dart';
 import 'package:submission_restauirant_app/data/models/restaurant_detail_model.dart';
+import 'package:submission_restauirant_app/provider/database_provider.dart';
 import 'package:submission_restauirant_app/provider/add_review_provider.dart';
 import 'package:submission_restauirant_app/provider/restaurant_detail_provider.dart';
 import 'package:submission_restauirant_app/ui/widgets/card_list_menus.dart';
@@ -196,7 +197,35 @@ class DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                 const Gap.h(w: 4),
                 Text("(${restaurantDetail!.rating})"),
                 const Spacer(),
-                const Icon(Icons.bookmark_border),
+                Consumer<DatabaseProvider>(
+                  builder: (context, data, child){
+                    return FutureBuilder<bool>(
+                        future: Provider.of<DatabaseProvider>(context, listen: false).checkExistData(restaurantDetail!.id),
+                        builder: (context, snapshot){
+                          var isFavorite = snapshot.data ?? false;
+                          return IconButton(
+                              onPressed: () async {
+                                try {
+                                  if(isFavorite){
+                                    await Provider.of<DatabaseProvider>(context, listen: false).addFavoriteRestaurant(restaurantDetail!.toRestaurant());
+                                  }else{
+                                    await Provider.of<DatabaseProvider>(context, listen: false).removeFavoriteRestaurant(restaurantDetail!.id);
+                                  }
+                                  if (data.responseState == ResponseState.success) {
+                                    if(context.mounted) SnackBarUtil().showSnackBar(context, data.message ?? "tidak diketahui", true);
+                                  } else {
+                                    if(context.mounted) SnackBarUtil().showSnackBar(context, data.message ?? "tidak diketahui", false);
+                                  }
+                                } catch (error) {
+                                  if(context.mounted) SnackBarUtil().showSnackBar(context, error.toString(), false);
+                                }
+                              },
+                              icon: Icon(isFavorite ? Icons.bookmark_border : Icons.bookmark)
+                          );
+                        }
+                    );
+                  },
+                ),
               ],
             ),
             const Gap.v(h: 8),

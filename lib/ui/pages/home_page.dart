@@ -46,11 +46,28 @@ class HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Welcome text
-                Text("Hi, ${AppConst.creator}",
-                    style: Theme.of(context).textTheme.headlineMedium),
-                const Gap.v(h: 4),
-                const Text(AppConst.welcomingText),
-                const Gap.v(h: 16),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Hi, ${AppConst.creator}",
+                            style: Theme.of(context).textTheme.headlineSmall),
+                        const Gap.v(h: 4),
+                        const Text(AppConst.welcomingText),
+                        const Gap.v(h: 16),
+                      ],
+                    ),
+                    const Spacer(),
+                    IconButton(onPressed: (){
+                      Navigator.of(context).pushNamed('/favorite');
+                    }, icon: const Icon(Icons.bookmark_add)),
+                    IconButton(onPressed: (){
+                      Navigator.of(context).pushNamed('/setting');
+                    }, icon: const Icon(Icons.settings)),
+                  ],
+                ),
 
                 // Search text field
                 CustomTextField(
